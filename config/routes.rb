@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'about' => 'welcome#about'
 
  
-
+  # get '/', to: 'welcome#index'
   root to: 'welcome#index'
 
 end

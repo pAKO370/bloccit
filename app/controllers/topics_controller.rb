@@ -6,9 +6,11 @@ class TopicsController < ApplicationController
   def show
      @topic = Topic.find(params[:id])
   end
+
   def new 
     @topic = Topic.new
   end
+
   def create
      
      @topic = Topic.new(topic_params)
@@ -20,9 +22,11 @@ class TopicsController < ApplicationController
        render :new
      end
    end
+
    def edit
      @topic = Topic.find(params[:id])
    end
+
    def update
      @topic = Topic.find(params[:id])
  
@@ -37,6 +41,7 @@ class TopicsController < ApplicationController
        render :edit
      end
    end
+
    def destroy
      @topic = Topic.find(params[:id])
  
@@ -49,10 +54,9 @@ class TopicsController < ApplicationController
      end
    end
 
-def topic_params
-  params.require(:topic).permit(:name, :description, :public)
-end
-
-
+   private
+    def topic_params
+      params.require(:topic).permit(:name, :description, :public)
+    end
 
 end

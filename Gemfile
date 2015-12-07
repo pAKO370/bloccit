@@ -31,6 +31,8 @@
  gem 'turbolinks'
  # Bootstrap for CSS
  gem 'bootstrap-sass'
+ # password encription
+ gem 'bcrypt'
  
 
 

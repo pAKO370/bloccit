@@ -54,6 +54,12 @@ posts = Post.all
       email: 'member@example.com',
       password: 'helloworld'
       )
+    moderator = User.create!(
+      name: 'Member 1 User',
+      email: 'member1@example.com',
+      password: 'helloworld',
+      role: 'moderator'
+      )
 
 
 

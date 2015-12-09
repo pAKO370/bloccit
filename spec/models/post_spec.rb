@@ -64,29 +64,33 @@ RSpec.describe Post, type: :model do
          post.update_rank
          expect(post.rank).to eq (post.points + (post.created_at - Time.new(1970,1,1)) / 1.day.seconds)
        end
+     end
  
        it "updates the rank when an up vote is created" do
          old_rank = post.rank
          post.votes.create!(value: 1)
          expect(post.rank).to eq (old_rank + 1)
        end
+     
  
        it "updates the rank when a down vote is created" do
          old_rank = post.rank
          post.votes.create!(value: -1)
          expect(post.rank).to eq (old_rank - 1)
        end
-     end
-     describe "after_create callback" do
-     it "triggers after_create on save" do
- # #26
-       expect(post).to receive(:after_create).at_least(:once)
-       post.save
-     end
+    end
+    describe "vote do" do
+    it "sets post up_votes to 1" do
+    expect(post.up_votes).to eq(1)
+    end 
+    it "calls #create vote when post is created" do
+    post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_sentence, user: user)
+    expect(post).to receive(:create_vote)
+    post.save
+    end
+    it "associates the vote with the owner of the post" do
+    expect(post.votes.first.user).to eq(post.user)
+    end
+    end   
  
-     it "updates votes by one" do
-      expect(user.votes.create).to eq(1)
-   end
- end
-  end
 end

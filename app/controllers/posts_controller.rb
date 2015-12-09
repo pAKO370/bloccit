@@ -23,6 +23,7 @@ class PostsController < ApplicationController
 
     if @post.save
       @post.labels = Label.update_labels(params[:post][:labels])
+      @post.ratings = Ratings.update_rating(params[:post][:ratings])
       flash[:notice] = "Post was saved"
       redirect_to [@topic, @post]
     else
@@ -42,6 +43,7 @@ class PostsController < ApplicationController
  
      if @post.save
       @post.labels = Label.update_labels(params[:post][:labels])
+      @post.ratings = Ratings.update_rating(params[:post][:ratings])
        flash[:notice] = "Post was updated."
        redirect_to [@post.topic, @post]
      else

@@ -33,6 +33,8 @@
  gem 'bootstrap-sass'
  # password encription
  gem 'bcrypt'
+ #figaro  sensetive data
+  gem 'figaro', '1.0'
  
 
 

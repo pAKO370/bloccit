@@ -1,0 +1,7 @@
+<% if flash[:notice]%>
+  <%= render(partial: 'shared/flash', locals: {key: :notice, cls: :success}) %>
+<% elsif flash[:error] %>
+  <%= render(partial: 'shared/flash', locals: {key: :error, cls: :danger}) %>
+<% elsif flash[:alert]%>
+  <%= render(partial: 'shared/flash', locals: {key: :alert, cls: :warning}) %>
+<%end%>

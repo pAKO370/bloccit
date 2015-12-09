@@ -77,6 +77,16 @@ RSpec.describe Post, type: :model do
          expect(post.rank).to eq (old_rank - 1)
        end
      end
-
+     describe "after_create callback" do
+     it "triggers after_create on save" do
+ # #26
+       expect(post).to receive(:after_create).at_least(:once)
+       post.save
+     end
+ 
+     it "updates votes by one" do
+      expect(user.votes.create).to eq(1)
+   end
+ end
   end
 end

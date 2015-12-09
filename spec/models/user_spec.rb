@@ -1,4 +1,5 @@
 require 'rails_helper'
+include RandomData
 
 RSpec.describe User, type: :model do
   
@@ -7,6 +8,7 @@ RSpec.describe User, type: :model do
    it {should have_many(:posts)}
    it {should have_many(:comments)}
    it {should have_many(:votes)}
+   it {should have_many(:favorites)}
    it { should validate_presence_of(:name) }
    it { should validate_length_of(:name).is_at_least(1) }
  
@@ -96,5 +98,23 @@ RSpec.describe User, type: :model do
          expect(user.admin?).to be_truthy
        end
      end
+     describe "#favorite_for(post)" do
+     before do
+       topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
+       @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+     end
+ 
+     it "returns `nil` if the user has not favorited the post" do
+ # #1
+       expect(user.favorite_for(@post)).to be_nil
+     end
+ 
+     it "returns the appropriate favorite if it exists" do
+ # #2
+       favorite = user.favorites.where(post: @post).create
+ # #3
+       expect(user.favorite_for(@post)).to eq(favorite)
+     end
+   end
    
  end

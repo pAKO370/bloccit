@@ -20,10 +20,48 @@
      </div>
    </div>
  </div>
- 
- 
+
+ <div class="row">
+ <div class="media-left">
+ <% if post?(@post) %>
+ <h2><%="#{@user.name} has not submitted any posts yet"%></h2>
+ <% else %>
  <h2>Posts</h2>
  <%= render @user.posts %>
  
+  
+ <% end %>
+ <% if comment?(@comment) %>
+ <h2><%="#{@user.name} has not submitted any comments yet"%></h2>
+ <% else %>
  <h2>Comments</h2>
  <%= render @user.comments %>
+ <% end %>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-md">
+  <div class="pull-right">
+    <h2>Comments</h2>
+ <%= render @user.favorites %>
+ <%end%>
+  <small>
+    <%= pluralize(@user.favorites.count, 'favorite') %>,
+    <%= pluralize(@user.votes.count, 'vote') %>
+         </small>
+       </div>
+  </div>
+</div>
+
+ 
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,7 @@ class Topic < ActiveRecord::Base
 
   scope :publically_viewable, -> {where(public: true)}
 
+  
   scope :privately_viewable, -> {where(public: false)}
 
 

@@ -370,4 +370,50 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+  context "moderator on posts" do
+      before do
+      user_mod.moderator!
+      create_session(user_mod)
+    end
+    describe "PUT update" do
+      it "returns http redirect" do
+        new_title = RandomData.random_sentence
+        new_body = RandomData.random_paragraph
+
+        put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
+    
+    describe 'PUT update' do
+      it "successfully updates the specified post with the specified attribtues" do
+        put :update, id:my_post.id, post: {title: 'new_title'}
+        updated_topic = Topic.find(original_topic.id)
+        expect(updated_post.name).to eq('new_title')
+      end
+    end
+      describe "GET new" do
+      it "returns http success" do
+        get :new, topic_id: my_topic.id
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+      it "renders the #new view" do
+        get :new, topic_id: my_topic.id
+        expect(response).to render_template :new
+      end
+
+      it "instantiates @post" do
+        get :new, topic_id: my_topic.id
+        expect(assigns(:post)).not_to be_nil
+      end
+    describe 'POST create' do
+      it 'does create a new post' do
+        original_count = topic.post.count
+        post :create, post: {title: 'new_title', body: 'new_body'}
+        expect(Post.count).to eq(original_count)
+      end
+    end
+  end
 end

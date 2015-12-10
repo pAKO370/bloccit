@@ -145,6 +145,11 @@ RSpec.describe TopicsController, type: :controller do
         delete :destroy, {id: my_topic.id}
         expect(response).to redirect_to(topics_path)
       end
+
+      it "doens't delete the topic" do
+        delete :destroy, {id: my_topic.id}
+        expect(Topic.find(my_topic.id)).to eq(my_topic)
+      end
     end
   end
 

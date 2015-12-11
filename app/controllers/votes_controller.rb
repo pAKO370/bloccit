@@ -8,6 +8,7 @@ class VotesController < ApplicationController
     respond_to do |format|
        format.html
        format.js
+     end
   end
 
   def down_vote
@@ -16,6 +17,7 @@ class VotesController < ApplicationController
    respond_to do |format|
        format.html
        format.js
+     end
   end
 
   private  
@@ -28,10 +30,8 @@ class VotesController < ApplicationController
      else
        @vote = current_user.votes.create(value: new_value, post: @post)
      end
-     respond_to do |format|
-       format.html
-       format.js
-     end
+     
+     
    end
 
 end

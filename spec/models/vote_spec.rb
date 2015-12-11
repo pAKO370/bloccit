@@ -3,9 +3,6 @@ include RandomData
 
 RSpec.describe Vote, type: :model do
   
-  let(:topic) { create(:topic) }
-  let(:user) { create(:user) }
-  let(:post) { create(:post) }
   let(:vote) { create(:vote) }
   
    it { should belong_to(:post) }

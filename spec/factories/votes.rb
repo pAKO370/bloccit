@@ -4,8 +4,8 @@ include RandomData
  FactoryGirl.define do
    factory :vote do
      value 1
-     vote 
+     post
      user
-     rank 0.0
+    
    end
  end

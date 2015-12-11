@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       flash[:notice] = "Comment was deleted"
     else 
-      flash.now[:alert] = "Comment couldnt be deleted. Try again."
+      flash.now[:alert] = "Comment couldn't be deleted. Try again."
     end
     respond_to do |format|
       format.html

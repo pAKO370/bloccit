@@ -3,7 +3,8 @@ include RandomData
 
 RSpec.describe Vote, type: :model do
   
-  let(:vote) { create(:vote) }
+  let(:vote) { create(:vote, post: my_post) }
+  let(:my_post) { create(:post)}
   
    it { should belong_to(:post) }
    it { should belong_to(:user) }
@@ -20,7 +21,7 @@ RSpec.describe Vote, type: :model do
  
      it "#update_post should call update_rank on post " do
  # #27
-       expect(post).to receive(:update_rank).at_least(:once)
+       expect(my_post).to receive(:update_rank).at_least(:once)
        vote.save
      end
    end

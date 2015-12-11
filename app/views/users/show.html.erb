@@ -20,14 +20,17 @@
      </div>
    </div>
  </div>
-  <%= posts_heading_for_user(@user) %>
 
+ <h2>Posts</h2>
+  <%= posts_heading_for_user(@user) %>
   <%= render @user.posts %>
  
 <h2>Comments</h2>
+<%= comments_heading_for_user(@user) %>
 <%= render @user.comments %>
 
 <h2>Favorited Posts</h2>
-<%= render @user.favorited_posts %>
+<%= render favorited_posts(@user)%>
 
-<%#= render partial: 'users/favorite' locals:{user: @user, posts: posts}%>
+
+

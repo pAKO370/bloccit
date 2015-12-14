@@ -10,7 +10,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
   def show
     post = Post.find(params[:id])
-    render json: post.to_json(include: :comments,include: :votes,include: :favorites), status: 200
+    render json: post.to_json(include: [:comments, :votes]), status: 200
   end
 
   def update
@@ -27,10 +27,12 @@ class Api::V1::PostsController < Api::V1::BaseController
   def create
     @topic = Topic.find(params[:topic_id])
     @post = Post.new(post_params)
+    @post.topic = @topic
+    @post.user = @current_user
 
     if @post.valid?
-      post.save!
-      render json: post.to_json, status: 201
+      @post.save!
+      render json: @post.to_json, status: 201
     else
       render json: {error: "Post is invalid", status: 400}, status: 400
     end

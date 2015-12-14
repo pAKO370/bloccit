@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :labels, only: [:show]
 
   resources :topics do
-  resources :posts, except: [:index]
-end
+    resources :posts, except: [:index]
+  end
 
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
@@ -27,9 +27,10 @@ end
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :create, :update]
-      resources :topics, except: [:edit, :new] 
+      resources :topics, except: [:edit, :new] do
+        post '/create_post' => 'api/v1/topics#create_post'
+      end 
       resources :posts, except: [:new, :edit]
-      
     end
   end
 end

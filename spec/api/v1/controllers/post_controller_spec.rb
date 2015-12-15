@@ -9,6 +9,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   before do
     3.times { create(:comment, post: my_post) }
     3.times { create(:vote, post: my_post) }
+    create(:favorite, post: my_post, user: my_user)
   end
 
 
@@ -36,6 +37,11 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     it "return the votes associated with the post" do
       expect(@parsed_response['votes'].size).to eq(my_post.votes.size)
       expect(@parsed_response['votes'].first['id']).to eq(my_post.votes.first.id)
+    end
+    it "return a favorite associated with the post" do
+
+      expect(@parsed_response['favorites'].size).to eq(my_post.favorites.size)
+      expect(@parsed_response['favorites'].first['id']).to eq(my_post.favorites.first.id)
     end
   end
 
